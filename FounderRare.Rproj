@@ -1,0 +1,24 @@
+Version: 1.0
+
+RestoreWorkspace: No
+SaveWorkspace: No
+AlwaysSaveHistory: Default
+
+EnableCodeIndexing: Yes
+UseSpacesForTab: Yes
+NumSpacesForTab: 2
+Encoding: UTF-8
+
+RnwWeave: Sweave
+LaTeX: pdfLaTeX
+
+AutoAppendNewline: Yes
+StripTrailingWhitespace: Yes
+LineEndingConversion: Posix
+
+BuildType: Package
+PackageUseDevtools: Yes
+PackagePath: /lustre03/project/6033529/genealogy_sims/results/Samir/MyPackages/FounderRare/
+PackageInstallArgs: --no-multiarch --with-keep.source /lustre03/project/6033529/genealogy_sims/results/Samir/MyPackages/FounderRare/
+PackageCheckArgs: /lustre03/project/6033529/genealogy_sims/results/Samir/MyPackages/FounderRare/
+PackageRoxygenize: rd,collate,namespace

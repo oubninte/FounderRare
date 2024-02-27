@@ -1,0 +1,25 @@
+Package: FounderRare
+Title: Statistical approach leveraging Founder Population Genealogy and Identical by Descent Segments to Identify Rare Variants in Complex Diseases.
+Version: 1.0
+Authors@R: 
+    person("Samir", "Oubninte", , "samir.oubninte.1@ulaval.ca", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0000-3795-7402"))
+Description: See "Statistical approach leveraging Founder Population Genealogy and Identical by Descent Segments to Identify Rare Variants in Complex Diseases" article.
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    dplyr,
+    GenomicRanges,
+    igraph,
+    stringr,
+    tidyr
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
