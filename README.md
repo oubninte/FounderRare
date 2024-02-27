@@ -12,3 +12,6 @@ Articles url ()
 ###
 If you use this package please cite this article or this one
 
+## Licence
+[MIT Licence](LICENCE)
+
