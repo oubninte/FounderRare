@@ -16,7 +16,7 @@
 #'
 #'
 #'
-TBMD=function(SGList, IBDClusters, disjM="Merge", remove=TRUE){
+TBMD=function(SGList, IBDClusters, disjM="Bigger", remove=TRUE){
   toRemove=c()
   SGListD= list()
 

@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-In this tutorial, we elucidate the workings of **FounderRare** Package, expound on the functions employed, and provide illustrative examples of the output. This comprehensive guide aims to provide a deeper understanding of the novel Smsg method and its potential applications in the field of complex disease research.
+In this tutorial, we elucidate the workings of `FounderRare` Package, expound on the functions employed, and provide illustrative examples of the output. This comprehensive guide aims to provide a deeper understanding of the novel Smsg method and its potential applications in the field of complex disease research.
 
 Smsg is a groundbreaking approach, Statistical approach leveraging Founder Population Genealogy and IBD Segments to Identify Rare Variants in Complex Diseases. This innovative method employs identical-by-descent segments (IBDS) as markers of recent variants within family data derived from a founder population with accessible genealogy.
 
@@ -34,15 +34,15 @@ Capitalizing on genotype array data, Smsg is scalable to large sample sizes. Fur
 
 ## R Markdown
 
-This is an R Markdown document for **FounderRare** package. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This is an R Markdown document for `FounderRare` package. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
+When you click the `Knit` button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
 
 ## Downald and install FounderRare Package
 
-The packages **devtools**, **BiocManager** and **GenomicRanges** are essential prerequisites for the installation of the **FounderRare** package. Additionally, the utilization of **FounderRare** necessitates the presence of **dplyr**, **igraph**, **stringr**, and **tidyr**. It is highly advised to install and load all these packages prior to attempting to use the **FounderRare** package.
+The packages `devtools`, `BiocManager` and `GenomicRanges` are essential prerequisites for the installation of the `FounderRare` package. Additionally, the utilization of `FounderRare` necessitates the presence of `dplyr`, `igraph`, `stringr`, and `tidyr`. It is highly advised to install and load all these packages prior to attempting to use the `FounderRare` package.
 
-The corresponding code below, demonstrating a method to install the **FounderRare** package:
+The corresponding code below, demonstrating a method to install the `FounderRare` package:
 
     # This line is used to install the 'devtools' package. 'devtools' provides tools to make developing R packages easier.
      install.packages("devtools")
@@ -55,16 +55,12 @@ The corresponding code below, demonstrating a method to install the **FounderRar
     BiocManager::install("GenomicRanges")
     
     # This line is used to install the 'FounderRare' package from GitHub using 'devtools'. You need to replace "username" with the actual GitHub username where the package is hosted and adjust the path accordingly.
-    devtools::install_github("username/FounderRare")  # Replace "username" with the actual GitHub username and adjust the path accordingly
+    devtools::install_github("oubninte/FounderRare") 
 
-
-Make sure to replace "**username**" in the **devtools::install_github()** function call with the correct GitHub username where the FounderRare package is hosted. Additionally, adjust the path if the package is not in the current working directory.
-
-Please note that if FounderRare is not on GitHub or if the package structure is different, you may need to adjust the installation command accordingly.
 
 Again I recommend to correctly loaded the dependencies libraries, here a code for that:
 
-Ensure that the placeholder **username/** in the devtools::install_github() function invocation is substituted with the accurate GitHub username where the **FounderRare** package is located. It is important to note that if **FounderRare** is not hosted on GitHub or if the package structure deviates, it may be necessary to alter the installation command to suit the specific circumstances.
+Ensure that the placeholder `oubninte/` in the devtools::install_github() function invocation is substituted with the accurate GitHub username where the `FounderRare` package is located. It is important to note that if `FounderRare` is not hosted on GitHub or if the package structure deviates, it may be necessary to alter the installation command to suit the specific circumstances.
 
 I advocate for the correct loading of the dependency libraries. The following code can be used for this purpose:
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
@@ -89,7 +85,7 @@ library(tidyr)
 
 ## Enumeration of Functions Contained in the Package
 
-A robust way to list all functions in a package is to use the ls() function along with the pattern argument. This code uses the ls() function with the pattern argument set to **\^[[:alpha:]]**, which matches names starting with a letter (typical for function names). The "package:FounderRare" specification ensures that it looks specifically within the "FounderRare" package.
+A robust way to list all functions in a package is to use the ls() function along with the pattern argument. This code uses the ls() function with the pattern argument set to `\^[[:alpha:]]`, which matches names starting with a letter (typical for function names). The "package:FounderRare" specification ensures that it looks specifically within the "FounderRare" package.
 
 Note: Make sure you have loaded the package using library(FounderRare) before running this code.
 
@@ -103,7 +99,7 @@ print(all_functions)
 
 ## Loading and importing data 
 
-The dataset “IBDClusters” is an integral component of the ‘FounderRare’ package and serves as a representative example of the data required by the package in its input arguments. The command data("IBDClusters") is employed to load the dataset, while str(IBDClusters) provides a comprehensive overview of the dataset’s structure.
+The FounderRare package incorporates the IBDClusters dataset as a key component, serving as a representative example of the data format required for the package’s input arguments. The dataset is loaded into the environment using the data("IBDClusters") command. To gain a comprehensive understanding of the dataset’s structure, the str(IBDClusters) command is utilized. Notably, this dataset is generated by parsing Dash’s .hcl file.
 
 Here’s an analytical interpretation of the output:
 
@@ -145,8 +141,6 @@ The specificity of importing file.hcl in this code lies in the dynamic generatio
 
 # Constructing Initial Genomic Ranges (Granges) for the Primary Synthetic Gene (SG) and Sliding-SG
 
-I always recommend to create the first Grange before tu use package function, because it give you chance to include some information not available in data like the number of chromosome, here the needed information to create the first element :
-
 It is always advisable to establish the initial Grange prior to utilizing the package function. This approach allows for the inclusion of certain unavailable data, such as the chromosome number. The following information is required to create the first element:
 
     chr = 22: Denotes the chromosome number (in this instance, chromosome 22).
@@ -173,9 +167,9 @@ gr.SG1=GRanges(
 
 This code block creates a genomic range object for the first synthetic gene (SG). The GRanges function from the GenomicRanges package in R is used to create this object. The seqnames argument specifies the chromosome for the range (in this case, chromosome 22), and the ranges argument, which uses the IRanges function, specifies the start and width of the range. The score argument is set to "\*", indicating that there is no metadata associated with this genomic range. The start of the range is set to the minimum value of the second column of the IBDClusters data frame, and the width of the range is set to minL*1000, where minL is the initial length of SG in kilobases (Kbp).
 
-**Construction of a GRange for the Sliding Synthetic Gene (gr.Sliding_SG):**
+**Generation of a GRange for the Sliding Synthetic Gene (gr.Sliding_SG):**
 
-The function **gr.Sliding_SG** is engineered to generate a Grange that represents a sliding synthetic gene (Sliding-SG) corresponding to a specific synthetic gene Grange (gr.SG). The provided code snippet exemplifies its application by invoking the function with parameters gr.SG and overlapSS = 10 (default value). Essentially, this function fabricates a sliding synthetic gene (SSG) with a length that is twice the specified overlap (overlapSS), given in kilobases (Kbp). The overlap parameter allows researchers to customize the window size.
+The gr.Sliding_SG function is specifically designed to create a GRange object, representing a sliding synthetic gene (Sliding-SG), which corresponds to a given synthetic gene GRange (gr.SG). As illustrated in the provided code snippet, the function is invoked with the parameters gr.SG and overlapSS = 10 (default value). In essence, this function generates a sliding synthetic gene (SSG) with a length that is double the specified overlap (overlapSS), measured in kilobases (Kbp). The overlapSS parameter offers researchers the ability to customize the window size as per their research requirements.
 
 
 ```{r }
@@ -188,7 +182,7 @@ gr.Sliding_SG(gr.SG1, overlapSS = 10)
 
 # Generation of the Subsequent Genomic Range via *gr.Next_SG*
 
-The **gr.Next_SG** function is designed to construct a Grange of subsequent synthetic gene (SG) following a specified SG Grange (gr.SG). This function provides customization options, enabling users to stipulate the minimum length (minL) of the ensuing genomic segment in kilobases. Moreover, an optional parameter, Overlap, allows for the creation of an overlap between the current and subsequent genomic segments. The code sample demonstrates the utilization of this function by invoking it with parameters gr.SG, minL = 400, and Overlap = 0. This adaptability allows researchers to tailor the genomic segment analysis to meet specific research needs. 
+The `gr.Next_SG` function is designed to construct a Grange of subsequent synthetic gene (SG) following a specified SG Grange (gr.SG). This function provides customization options, enabling users to stipulate the minimum length (minL) of the ensuing SG in kilobases. Moreover, an optional parameter, Overlap, allows for the creation of an overlap between the current and subsequent SGs. The code sample demonstrates the utilization of this function by invoking it with parameters gr.SG, minL = 400, and Overlap = 0. This adaptability allows researchers to tailor the genomic segment analysis to meet specific research needs. 
 
 Note: 
   This function can be employed to generate a custom sliding SG.
@@ -208,7 +202,7 @@ The provided R code presents a test case that involves the detection and compari
 
 ##Detection of the IBD Structure within an SG (IBD_structure):
 
-The **IBD_structure** function accepts a Grange (gr.SG), a data frame representing IBD clusters (IBDClusters), and an optional overlap cutoff that represents the percentage of overlap between the cluster and SG at which a cluster is considered to be included in the IBD Structure (default value is 0.5). The function returns the clusters of the IBD structure based on the specified parameters, leveraging information from the IBD clusters and calculating the percentage overlap with the given genomic range.
+The `IBD_structure` function accepts a Grange (gr.SG), a data frame representing IBD clusters (IBDClusters), and an optional overlap cutoff that represents the percentage of overlap between the cluster and SG at which a cluster is considered to be included in the IBD Structure (default value is 0.5). The function returns the clusters of the IBD structure based on the specified parameters, leveraging information from the IBD clusters and calculating the percentage overlap with the given genomic range.
 
 ```{r }
 # The IBD_structure function is called with parameters gr.SG1 and IBDClusters
@@ -225,7 +219,7 @@ SSG=list(gr.SSG, IBD_structure(gr.SSG, IBDClusters))
 ```
 
 ## Comparison of IBD Structures :
-        The **is_same_IBDstructure** function compares the IBD structures of two SGs (SG1 and Sliding-SG in this example) to ascertain if they are identical. The function returns TRUE if the IBD structures are identical and FALSE otherwise.
+        The `is_same_IBDstructure` function compares the IBD structures of two SGs (SG1 and Sliding-SG in this example) to ascertain if they are identical. The function returns TRUE if the IBD structures are identical and FALSE otherwise.
 
 ```{r }
 # The is_same_IBDstructure function is called with parameters SG1 and SSG
@@ -240,11 +234,11 @@ The R code presented below serves as a test case for the TBM (from Tunnel-Boring
 
 ## Testing the *TBM_SG* Function:
 
-The **TBM_SG** function, built on the TBM principle, dynamically creates or expands Granges based on their IBD structures. It accepts several parameters, including the SG under consideration, IBD clusters (IBDClusters), and various overlap and length parameters.
+The `TBM_SG` function, built on the TBM principle, dynamically creates or expands Granges based on their IBD structures. It accepts several parameters, including the SG under consideration, IBD clusters (IBDClusters), and various overlap and length parameters.
 
 If the IBD structure of the existing SG mirrors that of a Sliding-SG, as determined by the is_same_IBDstructure function, the function augments the existing SG. Specifically, it generates a sliding-SG and compares its IBD structure with that of the input SG. If they align, the function merges the sliding SG with the original SG, returning a list containing the extended SG Grange and its IBD structure, with an action indicator set to “Merge”. If the IBD structures diverge, indicating a unique pattern, the function generates a new proximate Grange using the gr.Next_SG function. This new SG is predicated on the minimum length parameter (minL), the IBD structure of the new SG is determined by the IBD_structure function. In this scenario, the function returns a list containing the new Grange and its IBD structure, with an action indicator set to “New”.
 
-In essence, the **TBM_SG** function offers a flexible and adaptive methodology for SG creation and expansion, based on the characteristics of their IBD structures. It is engineered to accommodate diverse genomic patterns, rendering it a valuable tool for subsequent steps.
+In essence, the `TBM_SG` function offers a flexible and adaptive methodology for SG creation and expansion, based on the characteristics of their IBD structures. It is engineered to accommodate diverse genomic patterns, rendering it a valuable tool for subsequent steps.
 
 ```{r }
 ## Execute the TBM_SG function with SG1 and IBDClusters as parameters (using default values for other parameters)
@@ -254,7 +248,7 @@ TBM_SG(SG1, IBDClusters)
 
 ## Testing the *TBM* Function:
 
-The code then proceeds to run the TBM function. The **TBM** function extends the functionality of **TBM_SG** to generate a list of SG. It iteratively scans the chromosome using the **TBM_SG function**. The function accepts parameters such as the list of SG (which contains the first SG as recommended), IBD clusters (the only required parameter), overlap parameters, minimum length of SGs, the number of iterations N (for testing purposes), and the concerned chromosome (chr). The resultant list (SGList) contains Granges of each SG along with their IBD structures.
+The code then proceeds to run the TBM function. The `TBM` function extends the functionality of `TBM_SG` to generate a list of SG. It iteratively scans the chromosome using the `TBM_SG function`. The function accepts parameters such as the list of SG (which contains the first SG as recommended), IBD clusters (the only required parameter), overlap parameters, minimum length of SGs, the number of iterations N (for testing purposes), and the concerned chromosome (chr). The resultant list (SGList) contains Granges of each SG along with their IBD structures.
 
 ```{r }
 
@@ -270,23 +264,27 @@ These functions enable the dynamic creation and modification of SG based on thei
 
 # Generated SGs and Disjointness in IBD Structures 
 
-The TBMD function is designed to transform the non-disjoint clusters present in the output list of SGs (SGList) from the TBM function into a refined output comprising segregated clusters. It sequentially examines each SG to determine if the IBD structure within the SG encompasses disjoint clusters, employing the **Disj_Clst_SG** function for this purpose. The function also offers an option to omit SG that lack any clusters in their IBD structure (remove=TRUE). The ultimate output of the **TBMD** function is a list of SG, each containing disjoint clusters within their IBD structures. The **Disj_Clst_SG** function applies principles of graph theory to convert the IBD structure into disjoint clusters. The input parameters encompass the SG of interest and IBD clusters. The function initiates by processing the input data, eliminating superfluous columns and managing missing values. Following this, it employs graph theory concepts to generate edges and construct a graph representation of haplotypes. The graph is subsequently partitioned into disjoint clusters. The function yields the modified SG with disjoint clusters in its IBD structure.
+The `TBMD` function is designed to transform the non-disjoint clusters present in the output list of SGs (`SGList`) from the `TBM` function into a refined output comprising disjoint clusters. It sequentially examines each SG to determine if the IBD structure within the SG encompasses disjoint clusters. By default, it employs the `Disj_Clst_SG_Bigger` function for this purpose. The `Disj_Clst_SG_Bigger` function converts the IBD structure into disjoint clusters by retaining the clusters with the most individuals among the overlapped clusters.
+
+The `TBMD` function also offers an option to build disjoint clusters by merging the overlapped clusters using the `Disj_Clst_SG` function. To optimize resources, the `Disj_Clst_SG` function applies principles of graph theory to convert the IBD structure into disjoint clusters. It employs graph theory concepts to represent the sharing between individuals, where an edge exists between individuals that share the segment, and vertices represent the two haplotypes of the individual. The graph is subsequently partitioned into disjoint clusters.
+
+The input parameters for `TBMD` encompass the SG of interest and IBD clusters. The parameter `disjM` should be set to `merge` if the `Disj_Clst_SG` function is to be used. Otherwise, the parameter `disjM` is set to `bigger` by default for the `Disj_Clst_SG_Bigger` function. The function begins by processing the input data, eliminating superfluous columns, and managing missing values. The ultimate output of the `TBMD` function is a list of SGs, each containing disjoint clusters within their IBD structures. The function yields the modified SG with disjoint clusters in its IBD structure. The function also offers an option to omit SGs that lack any clusters in their IBD structure (`remove=TRUE`).
 
 
 ```{r }
-# Generate a list of genomic segments using the TBM function
+# Generate a list of SGs using the TBM function
 SGList.chr = TBM(IBDClusters, SGList, N=50)
 
-# Use the TBMD function to segregate the clusters within each genomic segment
+# Use the TBMD function to separate the clusters within each SG
 TBMD(SGList.chr, IBDClusters)
 
 ```
 
-The R code example provided executes the TBM function with the parameters IBDClusters, SGList, and N=15 to generate a list of SGs (SGList.chr). This list is then passed to the TBMD function along with IBDClusters to segregate the clusters within each SG.
+The R code example provided executes the TBM function with the parameters IBDClusters, SGList, and N=50 to generate a list of SGs (SGList.chr). This list is then passed to the TBMD function along with IBDClusters to separate the clusters within each SG.
 
 # Computation of Most Shared SG with Disjoint IBD Clusters
 
-The **Smsg** function is designed to compute the **Most Shared SG** for a list of SGs, the resulting dataframe (df1 and df2) provides information about SG and the computed Smsg value.
+The `Smsg` function is designed to compute the `Most Shared SG` for a list of SGs, the resulting dataframe (df1 and df2) provides information about SG and the computed Smsg value.
 
 Function Parameters:
 
@@ -300,10 +298,10 @@ Output:
     
 This function is particularly beneficial for genetic data analysis, offering a quantitative measure of the most shared SG. The provision to normalize Smsg by the number of affected individuals augments the interpretability of the results in scenarios with varying numbers of affected individuals.
 
-The R code provided first applies the **TBMD** function to the list of SG (SGList.chr) to segregate the clusters within each segment. Then, the **Smsg** function is used to compute the most shared SG for the segregated list (SGListD.chr). This is done twice, once without specifying the number of affected individuals, and once with Naff set to 19.
+The R code provided first applies the `TBMD` function to the list of SG (SGList.chr) to segregate the clusters within each segment. Then, the `Smsg` function is used to compute the most shared SG for the disjoint list (SGListD.chr). This is done twice, once without specifying the number of affected individuals, and once with Naff set to 19.
 
 ```{r }
-# Segregate the clusters within each genomic segment
+# Segregate the clusters within each SG
 SGListD.chr = TBMD(SGList.chr, IBDClusters)
 
 # Compute Smsg
@@ -316,13 +314,14 @@ print(df2)
 
 ```
 
-The subsequent lines of code are for saving the results. It is recommended to save the list of genomic segments in RDS format. The second line writes the computed Smsg data to a CSV file, providing a convenient and shareable format for further analysis and visualization. RDS files can be utilized to compute the IBD measure Sall, as proposed by Whittemore and Halpern (1994), for a single SG using the **Sall_SG** function or for all SGs of a chromosome using the **Sall** function. The inputs and output of Sall are analogous to those of Smsg. An example of Sall is not presented due to the memory and time constraints required by this function.
+The subsequent lines of code are for saving the results. It is recommended to save the list of SGs in RDS format. The second line writes the computed Smsg data to a CSV file, providing a convenient and shareable format for further analysis and visualization. RDS files can be utilized to compute the IBD measure Sall, as proposed by Whittemore and Halpern (1994), for a single SG using the `Sall_SG` function or for all SGs of a chromosome using the `Sall` function. The inputs and output of Sall are analogous to those of Smsg. An example of Sall is not presented due to the memory and time constraints required by this function.
 
-    # Save the list of genomic segments in RDS format
+    # Save the list of SGs in RDS format
     saveRDS(SGListD.chr, file=SGListD.chr.filename)
     
     # Write the computed Smsg data to a CSV file
-    write.table(outSmsg, paste0(outFileNameWithPath, ".csv"), sep=",", quote=F, row.names = F, col.names = T)
+    write.csv(outSmsg, paste0(outFileNameWithPath, ".csv"), row.names = FALSE)
+
 
 References :
 
