@@ -1,21 +1,27 @@
 # FounderRare: A Package for Identifying Rare Variants in Complex Diseases
 
-## Introduction
 
 **FounderRare** is a package designed to provide a deeper understanding of the novel Smsg method and its potential applications in the field of complex disease research. Smsg is a groundbreaking statistical approach that leverages Founder Population Genealogy and Identical-By-Descent (IBD) Segments to identify rare variants in complex diseases. This innovative method employs IBD segments as markers of recent variants within family data derived from a founder population with accessible genealogy.
 
-## How It Works
-/vignettes/About_FounderRare.Rmd is comprehensive guide elucidates the workings of the package, expounds on the functions employed, and provides illustrative examples of the output.
-More information are availables :
-Articles url ()
 
 ###
-If you use this package please cite this article or this one
+If you use this package please cite:
+> **Main preprint:**  
+> *Statistical Approach Leveraging Genealogies of Populations with a Founder Effect and Identical by Descent Segments to Identify Rare Variants in Complex Diseases.* medRxiv (Sep 18, 2025), DOI: [10.1101/2025.09.16.25335588](https://doi.org/10.1101/2025.09.16.25335588)  
+
+Or
+
+> **Package preprint:**  
+> *FounderRare: A Novel Statistical Package to Identify Rare Variants in Complex Diseases.* medRxiv (Sep 11, 2025),  [10.1101/2025.09.11.25335516](https://www.medrxiv.org/content/10.1101/2025.09.11.25335516v1)
+
 
 ## Licence
 [MIT Licence](LICENCE)
 
-# Introduction
+# How It Works
+This is comprehensive guide elucidates the workings of the package, expounds on the functions employed, and provides illustrative examples of the output.
+
+## Introduction
 
 In this tutorial, we elucidate the workings of `FounderRare` Package, expound on the functions employed, and provide illustrative examples of the output. This comprehensive guide aims to provide a deeper understanding of the novel Smsg method and its potential applications in the field of complex disease research.
 
